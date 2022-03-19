@@ -2,9 +2,9 @@ import React, { useState,useEffect } from 'react'
 import styled from 'styled-components'
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
 import axios from "axios";
-import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from '@material-ui/core';
+import HomeService from '../services/HomePageServices';
+import { Outlet, Link } from "react-router-dom";
 
-const baseURL = "http://localhost:8080/v1";
 
 
 const Container = styled.div`
@@ -13,12 +13,13 @@ const Container = styled.div`
     display:flex;
     position: relative;
     overflow: hidden;
+
 `
 
 const Arr = styled.div`
     width: 50px;
     height: 50px;
-    background-color: #fff7f7;
+    background-color: #fef6f6;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -30,7 +31,7 @@ const Arr = styled.div`
     left: ${propos=> propos.direction === "left" && "10px"};
     right: ${propos=> propos.direction === "right" && "10px"};
     cursor: pointer;
-    opacity: 0.5px;
+    opacity: 1px;
     z-index: 2;
 `
 
@@ -38,7 +39,7 @@ const Wrapper = styled.div`
     height: 100%;
     display: flex;
     transform: translateX(${props=>props.slideIndex * -100}vw);
-    transition: all 4s ease;
+    transition: all 2s ease;
 
 `
 const Slide = styled.div`
@@ -48,7 +49,7 @@ const Slide = styled.div`
     align-items: center;
 `
 const ImgCont = styled.div`
-    height: 100%;
+    height: 80%;
     flex: 1;
 `
 const ImgC = styled.img`
@@ -58,6 +59,7 @@ const ImgC = styled.img`
 const InfCont = styled.div`
     flex: 1;
     padding: 50px;
+    margin-right: 400px;
 `
 const Title = styled.h1`
     font-size: 70px;
@@ -69,12 +71,6 @@ const Desc = styled.p`
     font-weight: 500;
     letter-spacing: 3px;
 `
-const Button = styled.button`
-    padding: 10px;
-    font-size: 20px;
-    background-color: transparent;
-    cursor: pointer;
-`
 
 
 const Slider = () => {
@@ -83,7 +79,7 @@ const Slider = () => {
     const [post, setPost] = useState([]);
 
     useEffect(() => {
-        axios.get(baseURL).then((response) => {
+       HomeService.getSliderContent().then((response) => {
           setPost(response.data);
         });
       }, []);
@@ -97,6 +93,11 @@ const Slider = () => {
         }
     }
 
+    const details = (id,item) => {
+        
+        
+    }
+
   return (
     <Container>
         <Arr direction = "left" onClick={()=>handleClick("left")}>
@@ -106,12 +107,13 @@ const Slider = () => {
             {post.map((post2)=>(
             <Slide bg = {post2.bg} key={post2.id}>
             <ImgCont>
-                <ImgC src = {post2.img}/>
+                 <Link to={"/Product/"+post2.id} state={{ from: post2.id }}>
+                     <ImgC src = {post2.image}/>
+                  </Link>
             </ImgCont>
             <InfCont>
-                <Title>{post2.title}</Title>
-                <Desc>{post2.desc}</Desc>
-                <Button>CLICKME</Button>
+                <Title>{post2.shortName}</Title>
+                <Desc>{post2.shortDesc}</Desc>
             </InfCont>
             </Slide>
             ))}
@@ -120,6 +122,7 @@ const Slider = () => {
             <ArrowRightOutlined/>
         </Arr>
     </Container>
+    
   )
 }
 

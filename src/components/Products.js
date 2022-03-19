@@ -1,21 +1,30 @@
-import React from 'react'
-import styled from 'styled-components'
-import Grid from '@material-ui/core/Grid'
+import React, { useState,useEffect } from 'react'
+import styled, { createGlobalStyle, keyframes, css } from "styled-components";
+import Product from './Product';
+import HomeService from '../services/HomePageServices';
 
-const product1 = [
-    {id: 1, name: 'buty', description: 'Bieganko'}
-]
+
+const Container = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 50%;
+`;
 
 const Products = () => {
+  const [post, setPost] = useState([]);
+
+  useEffect(() => {
+    HomeService.getRecommendedContent().then((response) => {
+       setPost(response.data);
+     });
+   }, []);
   return (
-    <main>
-        <Grid container justify = "center" spacing ={4}>
-        {product1.map((product) => (
-          <Grid key={product.id}>
-          </Grid>
+    <Container>
+       {post.map((product) => (
+              <Product item={product} key={product.id} />
         ))}
-        </Grid>
-    </main>
+    </Container>
   )
 }
 
