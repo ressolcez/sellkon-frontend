@@ -1,9 +1,8 @@
 import React, { useState,useEffect } from 'react'
 import styled from 'styled-components'
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
-import axios from "axios";
 import HomeService from '../services/HomePageServices';
-import { Outlet, Link } from "react-router-dom";
+import {Link } from "react-router-dom";
 
 
 
@@ -93,10 +92,6 @@ const Slider = () => {
         }
     }
 
-    const details = (id,item) => {
-        
-        
-    }
 
   return (
     <Container>

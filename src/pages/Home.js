@@ -4,8 +4,7 @@ import Slider from '../components/Slider';
 import Sales from '../components/Sales';
 import Topbar from '../components/Topbar'
 import styled from 'styled-components';
-import { Text } from '@chakra-ui/react'
-
+import Footer from '../components/Footer'
 import Divider from '@material-ui/core/Divider';
 import Categories from '../components/Categories';
 
@@ -15,7 +14,7 @@ const StyledDivider = styled(Divider)`
 
 const StyledCont = styled.div `
   width: 80%;
-  margin-left: 100px;
+  margin-left: 150px;
 `
 
 const StyledText = styled.text`
@@ -29,15 +28,15 @@ const Home = () => {
         <Topbar />
           <Slider />
           <StyledDivider/>
-            <h1> </h1>
         <Categories/>
-        <h1> </h1>
             <StyledDivider/>
-            <h1> </h1>
               <StyledText>
                 Polecane Produkty
             </StyledText>
         <Products/>
+        <StyledDivider/>
+        <Sales/>
+        <Footer/>
       </StyledCont>
     </div>
   );

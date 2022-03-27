@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import ProductService from "../../services/HomePageServices"
 import styled from 'styled-components'
+import {Link } from "react-router-dom";
 
 function ProductsList() {
     const [Products, setProducts] = useState([])
@@ -19,7 +20,6 @@ function ProductsList() {
     }
 
     const deleteProduct = (productId) => {
-        console.log(productId)
         ProductService.deleteProduct(productId).then((response) =>{
             getAllProducts();
         }).catch(error =>{
@@ -28,9 +28,7 @@ function ProductsList() {
          
      }
 
-
 const Container = styled.div ``
-
 const TableContainer = styled.div`
     padding: 20px;`
 
@@ -39,10 +37,8 @@ const TableContainer = styled.div`
             <TableContainer>
         <h2> Lista Produktów:</h2>
             <table className="table table-bordered table-striped">
-              
                 <thead>
                     <th> Produkt Id</th>
-                    <th> Kategoria </th>
                     <th> Nazwa produktu </th>
                     <th> Krotka nazwa </th>
                     <th> Cena </th>
@@ -52,6 +48,7 @@ const TableContainer = styled.div`
                     <th> Krótki opis </th>
                     <th> Caly opis </th>
                     <th> Zdjecie </th>
+                    <th> Kategoria </th>
                     <th> Akcja </th>
                 </thead>
                 <tbody>
@@ -59,8 +56,7 @@ const TableContainer = styled.div`
                         Products.map(
                             Product =>
                             <tr key = {Product.id}> 
-                                <td> {Product.id} </td>
-                                <td> {Product.category} </td>
+                                <td> {Product.product_id} </td>
                                 <td>{Product.productName}</td>
                                 <td>{Product.shortName}</td>
                                 <td>{Product.price}</td>
@@ -70,9 +66,11 @@ const TableContainer = styled.div`
                                 <td>{Product.shortDesc}</td>
                                 <td>{Product.fullDescription}</td>
                                 <td>{Product.image}</td>
+                                <td>{Product.categoryModel.category_id}</td>
                                 <td>
-                                <button className = "btn btn-danger" onClick = {() => deleteProduct(Product.id)}
-                                    style = {{marginLeft:"10px"}}> Usuń</button>
+                                <button className = "btn btn-danger btn-block" onClick = {() => deleteProduct(Product.product_id)}
+                                    style = {{marginBottom: "10px"}}> Usuń</button>
+                                    <Link className="btn btn-info" to={`/EditProduct/${Product.product_id}`} >Modyfikuj</Link>
                                 </td>
                             </tr>
                         )

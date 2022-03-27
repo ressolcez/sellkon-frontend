@@ -46,9 +46,9 @@ const Title = styled.h1`
 function Category({item}) {
   return (
     <Container>
-      <Image src={item.img} />
+      <Image src={item.image} />
       <Info>
-        <Title>{item.name}</Title>
+        <Title>{item.cateGoryName}</Title>
       </Info>
     </Container>
   )

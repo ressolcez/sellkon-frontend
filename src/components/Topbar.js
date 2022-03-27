@@ -77,7 +77,7 @@ const Topbar = () => {
                 <MenuItem>Rejestracja</MenuItem>
                 <MenuItem>Logowanie</MenuItem>
                 <MenuItem>
-                <Badge badgeContent={2137} color="primary">
+                <Badge badgeContent={11} color="primary">
                  <ShoppingCartOutlined />
                 </Badge>
                 </MenuItem>
