@@ -1,17 +1,9 @@
 import React from 'react'
-
 import styled from "styled-components";
-import {
-  FavoriteBorderOutlined,
-  SearchOutlined,
-  ShoppingCartOutlined,
-} from "@material-ui/icons";
-
-
 
 const Container = styled.div`
   flex: 1;
-  min-width: 500px;
+  width: 500px;
   height: 350px;
   display: flex;
   padding: 5px;

@@ -11,6 +11,7 @@ const Container = styled.div`
 
 const Input = styled.input`
     border: none;
+    width:500px;
 
 `;
 
@@ -39,9 +40,9 @@ const Search = styled.div`
 
 const SearchContainer = styled.div`
     border: 0.5px solid lightgray;
+    border-radius: 20px;
     display: flex;
     align-items: center;
-    margin-left: 50px;
     padding: 5px;
 `
 

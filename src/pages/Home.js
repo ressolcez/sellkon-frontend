@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import Footer from '../components/Footer'
 import Divider from '@material-ui/core/Divider';
 import Categories from '../components/Categories';
+import NavBar from '../components/NavBar';
 
 const StyledDivider = styled(Divider)`
   color: white;

@@ -1,11 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
-import { Grid } from '@mui/material';
-import {
-  FavoriteBorderOutlined,
-  SearchOutlined,
-  ShoppingCartOutlined,
-} from "@material-ui/icons";
+
 
 const Info = styled.div`
   opacity: 0;
@@ -74,14 +69,14 @@ function Product({ item }) {
     <Container>
     <Circle />
     <Image src={item.image} />
-    <Info>
-    <Title>{item.shortName}</Title>
-    <h1></h1>
-    <Desc>{item.shortDesc}</Desc>
-    <h1></h1>
-    <Price>{item.price},00zł</Price>
-    <h1></h1>
-    </Info>
+      <Info>
+        <Title>{item.shortName}</Title>
+        <h1></h1>
+          <Desc>{item.shortDesc}</Desc>
+          <h1></h1>
+            <Price>{item.price},00zł</Price>
+      <h1></h1>
+      </Info>
   </Container>
   );
 }
