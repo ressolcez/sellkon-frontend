@@ -5,7 +5,6 @@ import Topbar from '../components/Topbar'
 import Footer from '../components/Footer'
 import CategoryContent from '../CategoryListComponent/CategoryContent';
 import { useLocation } from 'react-router-dom'
-import Filters from '../CategoryListComponent/filters';
 import NavBar from '../components/NavBar';
 
 const StyledDivider = styled(Divider)`
@@ -18,6 +17,7 @@ const StyledCont = styled.div `
 `
 
 
+
 function CategoriesListProduct() {
 
   const location = useLocation()
@@ -25,11 +25,8 @@ function CategoriesListProduct() {
 
   return (
     <StyledCont>
-      <Topbar />
-      <NavBar/>
-
-      <CategoryContent/>
-
+      <Topbar decision={from}/>
+      <CategoryContent state={{ from: from }}/>
       <StyledDivider/>
       <Footer/>
    </StyledCont>

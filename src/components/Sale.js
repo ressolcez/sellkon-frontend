@@ -5,9 +5,10 @@ import { Text } from '@chakra-ui/react'
 const Item = styled.div`
   display: block;
   width: 100%;
-  height: 230px;
+  height: 300px;
   color: black;
   margin: 0 15px;
+  margin-top: 10px;
 `
 
 const ImgC = styled.img`

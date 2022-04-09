@@ -39,6 +39,10 @@ class HomePageServices{
     getAllCategory(){
         return axios.get("http://localhost:8080/category/AllCategory");
     }
+
+    getProductsFromCategory(categoryId){
+        return axios.get("http://localhost:8080/products/ProductsFromCategory" + '/' + categoryId)
+    }
 }
 
 export default new HomePageServices()

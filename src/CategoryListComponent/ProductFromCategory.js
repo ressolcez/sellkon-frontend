@@ -2,12 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import { Text } from '@chakra-ui/react'
 
-
 const Container = styled.div`
   flex: 1;
   margin: 5px;
-  min-width: 280px;
-  height: 250px;
+  min-width: 230px;
+  height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,19 +40,22 @@ const PriceC = styled.div`
 font-size: 10px;
 `
 
+const StyledShortDesc = styled.div`
+  font-size: 10px;
 
+`
 
 function ProductFromCategory({item}) {
     return (
       <Container>
-  
        <Item>
-      <ImgC src = {item.img}/>
+      <ImgC src = {item.image}/>
       <TitleC>
-      <TitleProductName>{item.nazwa}</TitleProductName>
+      <TitleProductName>{item.shortName}</TitleProductName>
       </TitleC>
-      <PriceC><Text as='s'>{item.cena},00zł</Text></PriceC>
-      {item.cena},00zł
+      <StyledShortDesc>{item.shortDesc}</StyledShortDesc>
+      <PriceC><Text as='s'>{item.newPrice},00zł</Text></PriceC>
+      {item.price},00zł
     </Item>
     </Container>
       )

@@ -12,7 +12,7 @@ const Container = styled.div`
     display:flex;
     position: relative;
     overflow: hidden;
-
+    z-index: 1;
 `
 
 const Arr = styled.div`
@@ -39,13 +39,13 @@ const Wrapper = styled.div`
     display: flex;
     transform: translateX(${props=>props.slideIndex * -100}vw);
     transition: all 2s ease;
-
 `
 const Slide = styled.div`
     width: 100vw;
     height: 100vh;
     display: flex;
     align-items: center;
+
 `
 const ImgCont = styled.div`
     height: 80%;

@@ -24,9 +24,8 @@ const StyledText = styled.text`
 
 const Home = () => {
   return (
-    <div>
       <StyledCont>
-        <Topbar />
+        <Topbar decision = {0}/>
           <Slider />
           <StyledDivider/>
         <Categories/>
@@ -39,7 +38,6 @@ const Home = () => {
         <Sales/>
         <Footer/>
       </StyledCont>
-    </div>
   );
 }
 
