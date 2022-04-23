@@ -51,7 +51,6 @@ function CategoryContent() {
   const { from } = location.state
   
   const [products, setProducts] = useState([]);
-  const [isChecked, setIsChecked] = useState(false);
 
   
   useEffect(() => {
@@ -60,10 +59,7 @@ function CategoryContent() {
      });
    }, []);
    
-   const handleOnChange = () => {
-    setIsChecked(!isChecked);
-  };
-
+  
 
   return (
     <StyledContainer>
@@ -73,8 +69,6 @@ function CategoryContent() {
           id="topping"
           name="topping"
           value="Paneer"
-          checked={isChecked}
-          onChange={handleOnChange}
         />
     </StyledFilter>
     <Container>

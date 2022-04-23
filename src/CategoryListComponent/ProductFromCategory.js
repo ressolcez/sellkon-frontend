@@ -1,17 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Text } from '@chakra-ui/react'
+import {Link } from "react-router-dom";
 
 const Container = styled.div`
   flex: 1;
   margin: 5px;
   min-width: 230px;
-  height: 300px;
+  max-width:230px;
+  height: 380px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  margin-top: 20px;
 `;
 
 const Item = styled.div`
@@ -35,13 +36,9 @@ const TitleC = styled.div`
 margin-bottom:10px;
 margin-top:10px;
 `
-
-const PriceC = styled.div`
-font-size: 10px;
-`
-
 const StyledShortDesc = styled.div`
   font-size: 10px;
+  margin-bottom: 8px;
 
 `
 
@@ -49,13 +46,15 @@ function ProductFromCategory({item}) {
     return (
       <Container>
        <Item>
+       <Link to={"/"+item.categoryModel.cateGoryName+"/"+item.product_id} state={{ from: item }}>
+
       <ImgC src = {item.image}/>
+      </Link>
       <TitleC>
       <TitleProductName>{item.shortName}</TitleProductName>
       </TitleC>
       <StyledShortDesc>{item.shortDesc}</StyledShortDesc>
-      <PriceC><Text as='s'>{item.newPrice},00zł</Text></PriceC>
-      {item.price},00zł
+      {item.newPrice},00zł
     </Item>
     </Container>
       )

@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import styled from "styled-components";
+import {Link } from "react-router-dom";
 
 const StyledInput = styled.input`
     width:300px;
@@ -25,6 +26,7 @@ const StyledDataResult = styled.div`
     overflow-y: auto;
     position: absolute;
     z-index: 2;
+    padding: 5px;
 `
 
 const StyledDataItem = styled.a`
@@ -32,6 +34,7 @@ const StyledDataItem = styled.a`
     height: 60px;
     display: flex;
     color: black;
+    margin-bottom: 8px;
 `
 
 const ImgC = styled.img`
@@ -42,11 +45,19 @@ const ImgC = styled.img`
 const TitleProductName = styled.text`
   font-size: 10px;
   width: 100px;
+  font-weight: bold;
 `
 
 const TitleC = styled.div`
-  margin-bottom:10px;
+  margin-left: 10px;
 `
+
+const StyledPrice = styled.div`
+    font-size: 9px;
+`
+
+
+
 
 
 function SearchBar({ placeholder, data }) {
@@ -84,12 +95,14 @@ function SearchBar({ placeholder, data }) {
             {filteredData.slice(0, 15).map((value, key) => {
               return (
                 <StyledDataItem>
+              <Link to={"/"+value.categoryModel.cateGoryName+"/"+value.product_id} state={{ from: value }}>
                  <ImgC src = {value.image}/>
+                 </Link>          
                     <TitleC>
                     <TitleProductName>{value.shortName}</TitleProductName>
+                    <StyledPrice>{value.newPrice},00zł</StyledPrice>
                     </TitleC>
-                    
-                </StyledDataItem>
+                </StyledDataItem>     
               );
             })}
           </StyledDataResult>

@@ -10,8 +10,47 @@ const TableContainer = styled.div`
 `
 
 function AddCategory() {
+
+  const [cateGoryName, setCateGoryName] = useState('');
+  const [image, setImage] = useState('')
+  const {id} = useParams();
+
+  
+  const addCategoryComponent = (e) => {
+    e.preventDefault();
+    const category = {cateGoryName,image}
+    HomePageServices.addCategory(category).then((response) =>{
+        console.log(response.data)
+        }).catch(error => {
+        console.log(error)
+    })
+}
+
   return (
-    <div><h1>AddCategory</h1></div>
+    <Container>
+            <TableContainer>
+                <form>
+            <table className="table table-bordered table-striped">
+            <thead>
+                    <th> Nazwa kategorii</th>
+                    <th> Zdjęcie </th>
+                </thead>
+                <tbody>
+
+                            <tr> 
+                            <td>
+                            <input placeholder="Nazwa kategorii" name="CategoryName" className="form-control" onChange={(e) => setCateGoryName(e.target.value)}/>
+                            </td>
+                            <td>
+                            <input placeholder="Zdjęcie" name="Image" className="form-control" onChange={(e) => setImage(e.target.value)}/>
+                            </td>
+                            </tr>
+                </tbody>
+            </table>
+            <button className = "btn btn-success" onClick = {(e) => addCategoryComponent(e)} >Zatwierdź</button>
+            </form>
+            </TableContainer>
+        </Container>
   )
 }
 

@@ -29,7 +29,7 @@ const Info = styled.div`
 `;
 
 const Title = styled.h1`
-    color:#ffe6e6;
+    color:#F08080;
     margin-bottom: 20px;
 `;
 

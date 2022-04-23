@@ -78,7 +78,7 @@ const [post, setPost] = useState([]);
             <Logo>
                 <LogoContainer>
                 <Link to={"/"}>
-                <img src = "https://raw.githubusercontent.com/ressolcez/example-front-back/master/Logo.png"/>
+                <img src = "https://raw.githubusercontent.com/ressolcez/sellkon-frontend/master/Logo.png"/>
                 </Link>
                  </LogoContainer>
             </Logo>

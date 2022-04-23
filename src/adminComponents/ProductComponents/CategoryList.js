@@ -22,6 +22,14 @@ function CategoryList() {
         })
     }
 
+    const deleteCategory = (categoryId) => {
+        CategoryService.deleteCategory(categoryId).then((response) =>{
+            getAllCategories();
+        }).catch(error =>{
+            console.log(error);
+        })
+         
+     }
 
   return (
     <Container>
@@ -43,6 +51,8 @@ function CategoryList() {
                                 <td> {Category.cateGoryName} </td>
                                 <td>{Category.image}</td>
                                 <td>
+                                <button className = "btn btn-danger btn-block" onClick = {() => deleteCategory(Category.category_id)}
+                                    style = {{marginBottom: "10px"}}> Usuń</button>
                                 </td>
                             </tr>
                         )

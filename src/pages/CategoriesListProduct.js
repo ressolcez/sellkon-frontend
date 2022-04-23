@@ -27,6 +27,7 @@ function CategoriesListProduct() {
     <StyledCont>
       <Topbar decision={from}/>
       <CategoryContent state={{ from: from }}/>
+      <h1></h1>
       <StyledDivider/>
       <Footer/>
    </StyledCont>

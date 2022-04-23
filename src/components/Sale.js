@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Text } from '@chakra-ui/react'
+import {Link } from "react-router-dom";
 
 const Item = styled.div`
   display: block;
@@ -33,7 +34,9 @@ font-size: 10px;
 function Sale({item}) {
   return (
     <Item>
+      <Link to={"/"+item.categoryModel.cateGoryName+"/"+item.product_id} state={{ from: item }}>
       <ImgC src = {item.image}/>
+      </Link>
       <TitleC>
       <TitleProductName>{item.shortName}</TitleProductName>
       </TitleC>

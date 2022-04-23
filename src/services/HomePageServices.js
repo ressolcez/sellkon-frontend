@@ -14,17 +14,14 @@ class HomePageServices{
     getAllProducts(){
         return axios.get(baseURL+"/AllProducts")
     }
-    AddProduct(productId,product){
-        console.log(productId)
-        return axios.post(baseURL + '/' + productId, product)
+    AddProduct(categoryId,product){
+        return axios.post(baseURL + '/' + categoryId, product)
     }
     deleteProduct(productId){
-        console.log(productId)
         return axios.delete(baseURL + '/' + productId);
     }
 
     updateProduct(productId, product,categoryId){
-        console.log(productId,categoryId)
         return axios.put(baseURL + '/' +productId+ '/'+categoryId, product);
     }
 
@@ -41,7 +38,15 @@ class HomePageServices{
     }
 
     getProductsFromCategory(categoryId){
-        return axios.get("http://localhost:8080/products/ProductsFromCategory" + '/' + categoryId)
+        return axios.get("http://localhost:8080/products/ProductsFromCategory/" + categoryId)
+    }
+
+    addCategory(category){
+        return axios.post('http://localhost:8080/category/', category)
+    }
+
+    deleteCategory(categoryId){
+        return axios.delete('http://localhost:8080/category/'+ categoryId)
     }
 }
 
