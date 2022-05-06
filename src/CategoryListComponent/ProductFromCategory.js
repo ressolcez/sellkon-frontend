@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Text } from '@chakra-ui/react'
 import {Link } from "react-router-dom";
 
 const Container = styled.div`
@@ -47,7 +46,6 @@ function ProductFromCategory({item}) {
       <Container>
        <Item>
        <Link to={"/"+item.categoryModel.cateGoryName+"/"+item.product_id} state={{ from: item }}>
-
       <ImgC src = {item.image}/>
       </Link>
       <TitleC>

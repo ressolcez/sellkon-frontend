@@ -41,6 +41,23 @@ class HomePageServices{
         return axios.get("http://localhost:8080/products/ProductsFromCategory/" + categoryId)
     }
 
+    getProductsFromCategoryFilteredByPrice(categoryId,minPrice,maxPrice){
+     
+        if(Object.keys(minPrice).length === 0){
+            minPrice = 0;
+          }
+          if(Object.keys(maxPrice).length === 0){
+            maxPrice = 50000;
+          }
+
+          console.log(categoryId)
+          console.log(minPrice)
+          console.log(maxPrice)
+  
+    
+        return axios.get("http://localhost:8080/products/price/" + categoryId +"/" + minPrice + "/" + maxPrice)
+    }
+
     addCategory(category){
         return axios.post('http://localhost:8080/category/', category)
     }

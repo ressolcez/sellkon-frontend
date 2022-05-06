@@ -36,14 +36,6 @@ const Container = styled.div`
   }
 `;
 
-const Circle = styled.div`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background-color: white;
-  position: absolute;
-`;
-
 const Image = styled.img`
   height: 65%;
   z-index: 2;
@@ -52,11 +44,13 @@ const Image = styled.img`
 const Title = styled.text`
   font-size: 15px;
   font-weight: bold;
-
+  display: flex;
+  margin-bottom: 5px;
 `
 
 const Desc = styled.text`
   font-size: 10px;
+  display: flex;
 `
 
 const Price = styled.text`
@@ -65,22 +59,18 @@ const Price = styled.text`
 
 
 const StyledImage = styled.div`
-
 `
 
 function Product({ item }) {
   return (
     <Container>
-    <Circle />
     <Image src={item.image} />
     <Link to={"/"+item.categoryModel.cateGoryName+"/"+item.product_id} state={{ from: item }}>
       <Info>
         <Title>{item.shortName}</Title>
-        <h1></h1>
           <Desc>{item.shortDesc}</Desc>
-          <h1></h1>
             <Price>{item.newPrice},00zł</Price>
-      <h1></h1>
+            
       </Info>
       </Link>
 

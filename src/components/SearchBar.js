@@ -54,6 +54,12 @@ const TitleC = styled.div`
 
 const StyledPrice = styled.div`
     font-size: 9px;
+    text-font:bold;
+`
+
+const StyledCategory = styled.div`
+    font-size: 11px;
+    margin-bottom: 2px;
 `
 
 
@@ -100,6 +106,7 @@ function SearchBar({ placeholder, data }) {
                  </Link>          
                     <TitleC>
                     <TitleProductName>{value.shortName}</TitleProductName>
+                    <StyledCategory>{value.categoryModel.cateGoryName}</StyledCategory>
                     <StyledPrice>{value.newPrice},00zł</StyledPrice>
                     </TitleC>
                 </StyledDataItem>     
