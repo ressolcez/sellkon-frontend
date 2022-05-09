@@ -12,6 +12,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
+  margin-bottom: 30px;
 `;
 
 const Item = styled.div`
@@ -45,8 +46,8 @@ function ProductFromCategory({item}) {
     return (
       <Container>
        <Item>
-       <Link to={"/"+item.categoryModel.cateGoryName+"/"+item.product_id} state={{ from: item }}>
-      <ImgC src = {item.image}/>
+       <Link to={"/"+item.categoryModel.cateGoryName+"/"+item.product_id} state={{ product_details: item }}>
+        <ImgC src = {item.image}/>
       </Link>
       <TitleC>
       <TitleProductName>{item.shortName}</TitleProductName>

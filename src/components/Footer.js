@@ -20,7 +20,7 @@ function Footer() {
   return (
     <main>
         <FooterCont>
-        <h5>Znajdź nas w Socjal media</h5>
+        <h5>Znajdź nas w Social media</h5>
         <ImgCont>
              <a href="https://www.facebook.com/konrad.chrabaszcz.773/">   
             <Img src = "https://partner-bud.pl/wp-content/uploads/2016/11/facebook-icon-preview-1-300x300.png" />

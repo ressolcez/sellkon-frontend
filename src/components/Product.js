@@ -58,19 +58,17 @@ const Price = styled.text`
 `
 
 
-const StyledImage = styled.div`
-`
+const StyledImage = styled.div``
 
 function Product({ item }) {
   return (
     <Container>
     <Image src={item.image} />
-    <Link to={"/"+item.categoryModel.cateGoryName+"/"+item.product_id} state={{ from: item }}>
+    <Link to={"/"+item.categoryModel.cateGoryName+"/"+item.product_id}  state={{ product_details: item }}>
       <Info>
         <Title>{item.shortName}</Title>
           <Desc>{item.shortDesc}</Desc>
-            <Price>{item.newPrice},00zł</Price>
-            
+            <Price>{item.newPrice},00zł</Price>       
       </Info>
       </Link>
 

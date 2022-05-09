@@ -50,11 +50,6 @@ class HomePageServices{
             maxPrice = 50000;
           }
 
-          console.log(categoryId)
-          console.log(minPrice)
-          console.log(maxPrice)
-  
-    
         return axios.get("http://localhost:8080/products/price/" + categoryId +"/" + minPrice + "/" + maxPrice)
     }
 
@@ -64,6 +59,14 @@ class HomePageServices{
 
     deleteCategory(categoryId){
         return axios.delete('http://localhost:8080/category/'+ categoryId)
+    }
+
+    getOpinionsToProduct(productId){
+        return axios.get("http://localhost:8080/opinions/opinionsProduct/"+productId)
+    }
+
+    addOpinion(productId,opinion){
+      return axios.post("http://localhost:8080/opinions/"+ productId, opinion)
     }
 }
 

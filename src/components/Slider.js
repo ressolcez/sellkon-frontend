@@ -102,7 +102,7 @@ const Slider = () => {
             {post.map((post2)=>(
             <Slide bg = {post2.bg} key={post2.id}>
             <ImgCont>
-                 <Link to={"/"+post2.categoryModel.cateGoryName+"/"+post2.product_id} state={{ from: post2 }}>
+                 <Link to={"/"+post2.categoryModel.cateGoryName+"/"+post2.product_id}  state={{ product_details: post2 }}>
                      <ImgC src = {post2.image}/>
                   </Link>
             </ImgCont>

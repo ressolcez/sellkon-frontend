@@ -34,7 +34,7 @@ font-size: 10px;
 function Sale({item}) {
   return (
     <Item>
-      <Link to={"/"+item.categoryModel.cateGoryName+"/"+item.product_id} state={{ from: item }}>
+      <Link to={"/"+item.categoryModel.cateGoryName+"/"+item.product_id}  state={{ product_details: item }}>
       <ImgC src = {item.image}/>
       </Link>
       <TitleC>

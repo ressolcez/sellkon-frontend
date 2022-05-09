@@ -3,13 +3,11 @@ import styled from "styled-components";
 import ProductFromCategory from './ProductFromCategory';
 import { useLocation } from 'react-router-dom'
 import HomeService from '../services/HomePageServices';
-import Filters from './Filters';
 import {motion} from 'framer-motion'
 
 const StyledContainer = styled.div`
       display: flex;
       margin-top: 40px;
-
 `
 
 const StyledFilter = styled.div`
@@ -20,7 +18,6 @@ const StyledFilter = styled.div`
      padding: 10px;
      margin-bottom: 20px;
 `
-
 
 const StyledMinPrice = styled.input`
       width:70px;
@@ -39,7 +36,16 @@ const StyledMaxPrice = styled.input`
 `
 
 const StyledPriceText = styled.div`
+    display:block;
+    font-size:15px;
+    margin-bottom: 8px;
+`
+
+const StyledPriceTextPro = styled.div`
 display:block;
+font-size:15px;
+margin-top: 5px;
+margin-bottom: 8px;
 `
 
 const mystyle = {
@@ -48,6 +54,8 @@ const mystyle = {
   marginLeft: '5%',
   width:'82.5%'
 };
+
+const StyledProducents = styled.div``
 
 
 
@@ -63,17 +71,39 @@ function CategoryContent() {
   const [maxPrice,setMaxPrice] = useState(20000);
   const [unknow,setUnknow] = useState(0);
 
+ 
+  const handleProducentsName = () => {
+    if(from===1){
+      return(
+        <div>
+          <h3>dell</h3>
 
-  
+        </div>
+      );
+    }else if(from===2){
+       return(
+        <div>
+          <h3>asus</h3>
+
+        </div>
+       );
+    }
+}
+
   useEffect(() => {
       HomeService.getProductsFromCategoryFilteredByPrice(from,minPrice,maxPrice).then((response) => {
         setFiltered(response.data);
+
     });
+
 
    }, [minPrice,maxPrice]);
 
-  
+   console.log(filtered)
+
+
   return (
+    
     <StyledContainer>
     <StyledFilter>
     <StyledPriceText>Cena:</StyledPriceText>
@@ -86,7 +116,12 @@ function CategoryContent() {
     onChange={(e) => setMaxPrice(e.target.value)}
 
     />
-    </StyledFilter>
+
+  <StyledPriceTextPro>Producenci:</StyledPriceTextPro> 
+  <StyledProducents>
+  </StyledProducents>
+  </StyledFilter>
+
     <motion.div style = {mystyle} layout>
     {filtered.map((product) => {
             return  <ProductFromCategory item={product} key={product.id} />;

@@ -5,8 +5,7 @@ import Topbar from '../components/Topbar'
 import Footer from '../components/Footer'
 import CategoryContent from '../CategoryListComponent/CategoryContent';
 import { useLocation } from 'react-router-dom'
-import NavBar from '../components/NavBar';
-import {motion} from 'framer-motion'
+
 
 const StyledDivider = styled(Divider)`
   color: white;
