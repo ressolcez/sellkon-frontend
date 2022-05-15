@@ -35,7 +35,7 @@ function CategoryList() {
     <Container>
             <TableContainer>
         <h2> Lista Kategorii:</h2>
-            <table className="table table-bordered table-striped">
+            <table className="table table-bordered table-sm table-striped">
                 <thead>
                     <th> Category Id</th>
                     <th> Nazwa Kategorii </th>

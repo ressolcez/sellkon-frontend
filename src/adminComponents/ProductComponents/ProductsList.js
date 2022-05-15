@@ -36,7 +36,7 @@ const TableContainer = styled.div`
         <Container>
             <TableContainer>
         <h2> Lista Produktów:</h2>
-            <table className="table table-bordered table-striped">
+            <table className="table table-bordered table-sm table-striped">
                 <thead>
                     <th> Produkt Id</th>
                     <th> Nazwa produktu </th>

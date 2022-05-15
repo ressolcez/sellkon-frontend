@@ -49,12 +49,13 @@ const Title = styled.text`
 `
 
 const Desc = styled.text`
-  font-size: 10px;
+  font-size: 14px;
   display: flex;
 `
 
 const Price = styled.text`
-  font-size 9px;
+  font-size 14px;
+  color:green;
 `
 
 

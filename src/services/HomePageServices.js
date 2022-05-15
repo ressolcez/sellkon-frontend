@@ -68,6 +68,11 @@ class HomePageServices{
     addOpinion(productId,opinion){
       return axios.post("http://localhost:8080/opinions/"+ productId, opinion)
     }
+
+    registerUser(userData)
+    {
+        return axios.post('http://localhost:8080/user/', userData)
+    }
 }
 
 export default new HomePageServices()

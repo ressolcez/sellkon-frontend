@@ -75,7 +75,7 @@ useEffect(() => {
     const infTable = () => {
         if(id){
             return (
-     <table className="table table-bordered table-striped">
+     <table className="table table-bordered table-sm table-striped">
         <thead>
         <th> Produkt Id</th>
                     <th> Nazwa produktu </th>

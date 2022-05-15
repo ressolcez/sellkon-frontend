@@ -30,7 +30,7 @@ function AddCategory() {
     <Container>
             <TableContainer>
                 <form>
-            <table className="table table-bordered table-striped">
+            <table className="table table-bordered table-sm table-striped">
             <thead>
                     <th> Nazwa kategorii</th>
                     <th> Zdjęcie </th>

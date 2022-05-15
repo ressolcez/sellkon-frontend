@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect,useContext } from 'react'
 import styled from "styled-components";
 import ShoppingCartOutlined from '@material-ui/icons/ShoppingCartOutlined';
 import { Badge } from "@material-ui/core";
@@ -6,7 +6,9 @@ import SearchBar from './SearchBar';
 import HomeService from '../services/HomePageServices';
 import { IoSearch } from "react-icons/io5";
 import {Link } from "react-router-dom";
-
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import ManSharpIcon from '@mui/icons-material/ManSharp';
+import { UserContext } from '../context/UserContext';
 
 const Wrapper = styled.div`
     padding: 10px 20px;
@@ -56,10 +58,25 @@ const MenuItem = styled.div`
     margin-right: 25px;
 `
 
+const StyledLink = styled(Link)`
+  color: black;
+  &:hover{
+    color: black;
+  }
+`
+
+const StyledLinkLogin = styled(Link)`
+  color: black;
+  &:hover{
+    color: black;
+  }
+`
+
 
 const Topbar = ({decision}) => {
 
 const [post, setPost] = useState([]);
+const {user,setUser} = useContext(UserContext);
 
   useEffect(() => {
       if(decision === 0){
@@ -77,9 +94,9 @@ const [post, setPost] = useState([]);
         <Wrapper>
             <Logo>
                 <LogoContainer>
-                <Link to={"/"}>
+                <StyledLink to={"/"}>
                 <img src = "https://raw.githubusercontent.com/ressolcez/sellkon-frontend/master/Logo.png"/>
-                </Link>
+                </StyledLink>
                  </LogoContainer>
             </Logo>
             <Search>
@@ -89,7 +106,9 @@ const [post, setPost] = useState([]);
                 <SearchBar placeholder="Wprowadź nazwę szukanego sprzętu" data={post} />
             </Search>
             <RightThings>
-                <MenuItem>Logowanie</MenuItem>
+            <StyledLinkLogin to={"/Login"}>
+                <MenuItem> <ManSharpIcon fontSize="large"/>Twoje Konto</MenuItem>
+                </StyledLinkLogin>
                 <MenuItem>
                 <Badge badgeContent={1} color="primary">
                  <ShoppingCartOutlined />

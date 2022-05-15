@@ -7,10 +7,23 @@ import CategoriesListProduct from "./pages/CategoriesListProduct";
 import ListCategoryView from "./adminComponents/ListCategoryView";
 import AddCategoryView from "./adminComponents/AddCategoryView";
 import ProductDetails from "./pages/ProductDetails";
+import { UserContext } from "./context/UserContext";
+import React, { useState,useMemo } from 'react'
 
 function App() {
+  const [user,setUser] = useState('')
+  const providerUser = useMemo(() => ({user,setUser}),[user,setUser])
+
+  /*
+  useEffect(() => {
+    const saved = localStorage.getItem("user");
+    const initialValue = JSON.parse(saved);
+    setUser(initialValue);
+  }, []);
+*/
   return (
     <BrowserRouter>
+    <UserContext.Provider value = {providerUser}>
       <Routes>
       <Route exact path="/" element={<Home/>}/>
       <Route  path="/Login" element={<Login/>}/>
@@ -23,6 +36,7 @@ function App() {
       <Route path="/:cateGoryName/:id" element={<ProductDetails/>}/>
       <Route path = "/EditProduct/:id" element = {<AddProductView/>}></Route>
       </Routes>
+      </UserContext.Provider>
     </BrowserRouter>
   );
 }
