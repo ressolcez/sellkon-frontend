@@ -12,7 +12,8 @@ import RecommendedProducts from './RecommendedProducts'
 import OpinionsComponent from './Opinions';
 import AddOpinion from './AddOpinion'
 import Rating from "@mui/material/Rating";
-
+import {useParams} from "react-router-dom";
+import {useCart} from "react-use-cart"
 const breakPoints = [
   { width: 500, itemsToShow: 5 },
 ];
@@ -76,29 +77,32 @@ const StyledOpinions = styled.div`
 font-size: 18px;
 `
 
-function ProductDetailsComponent({product_details,opinions_det}) {
+function ProductDetailsComponent({products}) {
 
-  console.log(opinions_det)
-  const images = [
-    {
-      original: product_details.image,
-    },
-    {
-      original: product_details.image,
-    },
-  ];
+  let { id } = useParams();
+  const { addItem } = useCart();
 
   const [recommendedProducts ,setRecommendedProducts] = useState([])
   const [opinions ,setOpinions] = useState([])
+
+  const images = [
+    {
+      original: products.image,
+    },
+    {
+      original: products.image,
+    },
+  ];
 
   useEffect(() => {
     HomeService.getRecommendedContent().then((response) => {
        setRecommendedProducts(response.data);
      });
 
-     HomeService.getOpinionsToProduct(product_details.product_id).then((responseOpinion) => {
+     HomeService.getOpinionsToProduct(id).then((responseOpinion) => {
       setOpinions(responseOpinion.data);
     });
+
    }, []);
 
    const handleRating = () => {
@@ -145,125 +149,125 @@ function ProductDetailsComponent({product_details,opinions_det}) {
 
 
   const handleTableSpec = () => {
-    if(product_details.categoryModel.category_id == 1){
+    if(products.categoryModel?.category_id == 1){
       return(
         <table className="table table-sm table-striped">
         <tbody>
             <tr>
             <td> Procesor  </td>
-            <td class="text-xs-left">{product_details.computerDetailsModel.processor}</td>
+            <td class="text-xs-left">{products.computerDetailsModel.processor}</td>
             </tr>
             <tr>
             <td> Chipset  </td>
-            <td>{product_details.computerDetailsModel.chipset}</td>
+            <td>{products.computerDetailsModel.chipset}</td>
             </tr>
             <tr>
             <td> Karta graficzna  </td>
-            <td>{product_details.computerDetailsModel.grapic_card}</td>
+            <td>{products.computerDetailsModel.grapic_card}</td>
             </tr>
             <tr>
             <td> Wielkość pamięci karty graficznej  </td>
-            <td>{product_details.computerDetailsModel.grapic_card_max_mem}</td>
+            <td>{products.computerDetailsModel.grapic_card_max_mem}</td>
             </tr>
             <tr>
             <td>Wbudowane napędy optyczne</td>
-            <td>{product_details.computerDetailsModel.optical_drives}</td>
+            <td>{products.computerDetailsModel.optical_drives}</td>
             </tr>
             <tr>
             <td>Łączność</td>
-            <td>{product_details.computerDetailsModel.connection}</td>
+            <td>{products.computerDetailsModel.connection}</td>
             </tr>
             <tr>
             <td>Zasilacz</td>
-            <td>{product_details.computerDetailsModel.charger}</td>
+            <td>{products.computerDetailsModel.charger}</td>
             </tr>
             <tr>
             <td> Podświetlenie obudowy  </td>
-            <td>{product_details.computerDetailsModel.casing_illum}</td>
+            <td>{products.computerDetailsModel.casing_illum}</td>
             </tr>
             <tr>
             <td> System operacyjny  </td>
-            <td>{product_details.computerDetailsModel.operating_system}</td>
+            <td>{products.computerDetailsModel.operating_system}</td>
             </tr>
             <tr>
             <td> Szerokość  </td>
-            <td>{product_details.computerDetailsModel.width}</td>
+            <td>{products.computerDetailsModel.width}</td>
             </tr>
             <tr>
             <td> Wysokość  </td>
-            <td>{product_details.computerDetailsModel.height}</td>
+            <td>{products.computerDetailsModel.height}</td>
             </tr>
             <tr>
             <td> Głębokość</td>
-            <td>{product_details.computerDetailsModel.depth}</td>
+            <td>{products.computerDetailsModel.depth}</td>
             </tr>
         </tbody>
       </table>
 
       );
-    }else if(product_details.categoryModel.category_id == 2){
+    }else if(products.categoryModel?.category_id == 2){
       return(
         <table className="table table-sm table-striped">
         <tbody>
             <tr>
             <td> Procesor  </td>
-            <td class="text-xs-left">{product_details.laptopDetailsModel.processor}</td>
+            <td class="text-xs-left">{products.laptopDetailsModel.processor}</td>
             </tr>
             <tr>
             <td> Chipset  </td>
-            <td>{product_details.laptopDetailsModel.chipset}</td>
+            <td>{products.laptopDetailsModel.chipset}</td>
             </tr>
             <tr>
             <td> Karta graficzna  </td>
-            <td>{product_details.laptopDetailsModel.grapic_card}</td>
+            <td>{products.laptopDetailsModel.grapic_card}</td>
             </tr>
             <tr>
             <td> Wielkość pamięci karty graficznej  </td>
-            <td>{product_details.laptopDetailsModel.grapic_card_max_mem}</td>
+            <td>{products.laptopDetailsModel.grapic_card_max_mem}</td>
             </tr>
             <tr>
             <td>Wbudowane napędy optyczne</td>
-            <td>{product_details.laptopDetailsModel.optical_drives}</td>
+            <td>{products.laptopDetailsModel.optical_drives}</td>
             </tr>
             <tr>
             <td>Łączność</td>
-            <td>{product_details.laptopDetailsModel.connection}</td>
+            <td>{products.laptopDetailsModel.connection}</td>
             </tr>
             <tr>
             <td>Zasilacz</td>
-            <td>{product_details.laptopDetailsModel.charger}</td>
+            <td>{products.laptopDetailsModel.charger}</td>
             </tr>
             <tr>
             <td> System operacyjny  </td>
-            <td>{product_details.laptopDetailsModel.operating_system}</td>
+            <td>{products.laptopDetailsModel.operating_system}</td>
             </tr>
             <tr>
             <td> Szerokość  </td>
-            <td>{product_details.laptopDetailsModel.width}</td>
+            <td>{products.laptopDetailsModel.width}</td>
             </tr>
             <tr>
             <td> Wysokość  </td>
-            <td>{product_details.laptopDetailsModel.height}</td>
+            <td>{products.laptopDetailsModel.height}</td>
             </tr>
             <tr>
             <td> Głębokość</td>
-            <td>{product_details.laptopDetailsModel.depth}</td>
+            <td>{products.laptopDetailsModel.depth}</td>
             </tr>
             <tr>
             <td> Przekątna_ekranu</td>
-            <td>{product_details.laptopDetailsModel.screen_diag}</td>
+            <td>{products.laptopDetailsModel.screen_diag}</td>
             </tr>
             <tr>
             <td> Jasność matrycy </td>
-            <td>{product_details.laptopDetailsModel.matrix_britn}</td>
+            <td>{products.laptopDetailsModel.matrix_britn}</td>
             </tr>
             <tr>
             <td> Rozdzielczość Ekranu </td>
-            <td>{product_details.laptopDetailsModel.ekran_res}</td>
+            <td>{products.laptopDetailsModel.ekran_res}</td>
             </tr>
             <tr>
             <td> Typ Ekranu </td>
-            <td>{product_details.laptopDetailsModel.ekran_type}</td>
+            <td>{products.laptopDetailsModel.ekran_type}</td>
             </tr>
         </tbody>
       </table>
@@ -287,13 +291,12 @@ function ProductDetailsComponent({product_details,opinions_det}) {
               showPlayButton={false}/>
       </StyledGalery>
       <StyledDesc>
-      <h3>{product_details.productName}</h3>
-      {product_details.shortDesc} {product_details.fullDescription}
-      <StyledPrice> <b>Cena:</b>  {product_details.newPrice},00zł</StyledPrice>
 
-      <Button style={{
-        backgroundColor: "green",
-       }}variant="contained" endIcon={ <ShoppingCartIcon />}>
+      <h3>{products.productName}</h3>
+      {products.shortDesc} {products.fullDescription}
+      <StyledPrice> <b>Cena:</b>  {products.newPrice},00zł</StyledPrice>
+      {console.log(products)}
+      <Button style={{backgroundColor: "green",}}variant="contained" endIcon={ <ShoppingCartIcon />} onClick={() => addItem(products)}>
         Dodaj do koszyka
       </Button>
 
@@ -315,7 +318,7 @@ function ProductDetailsComponent({product_details,opinions_det}) {
           ))}
           
       <StyledDivider/>
-      <AddOpinion item = {product_details.product_id}/>
+      <AddOpinion item = {products.product_id}/>
       <StyledSpec><h4>Polecane produkty:</h4></StyledSpec>
       
       {<StyledCarouselContainer>

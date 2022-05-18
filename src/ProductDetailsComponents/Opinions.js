@@ -48,7 +48,7 @@ function Opinions({item}) {
     <Container>
       <InsideCont>
       <Col1>
-      {handleAvatar(item.rating)} Konrad
+      {handleAvatar(item.rating)} {item.userModel.name}
       </Col1>
       <Col2>
       <Rating name="read-only" value={item.rating} readOnly size="small"/>

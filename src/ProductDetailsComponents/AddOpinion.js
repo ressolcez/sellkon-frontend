@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect,useContext} from 'react'
 import styled from 'styled-components';
 import Button from '@mui/material/Button';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import Rating from "@mui/material/Rating";
 import HomeService from '../services/HomePageServices';
+import { UserContext } from '../context/UserContext';
 
 const Cont = styled.div`
   margin-top: 30px;
@@ -38,27 +39,32 @@ const RatingCont = styled.div`
 
 function AddOpinion({item}) {
 
-const [comment, setValue] = useState('');
-const [rating,setRatingVal] = useState(0)
+  const [comment, setValue] = useState('');
+  const [rating,setRatingVal] = useState(0)
+  let {user,setUser} = useContext(UserContext);
+
 
   const addProduct = (e) => {
-    let user_id= 1;
-    e.preventDefault();
-    const opinion = {user_id,comment,rating};
+    let user_id= user.id;
 
-    HomeService.addOpinion(item,opinion).then((response) =>{
+    const opinion = {comment,rating};
+    HomeService.addOpinion(item,user_id,opinion).then((response) =>{
       console.log(response.data)
       }).catch(error => {
          console.log(error)
-  })
-  window.location.reload(false);
-
+      })
+      window.location.reload(false);
+  
   }
 
+  function checkUserLogin(){
 
-  return (
-    <Cont>
-       <form>
+    if(user.id===0){
+      return <h5>Zaloguj się aby dodać opinie</h5>;
+    }else{
+      return(
+        <div>
+           <form>
          <RatingCont>
       <Rating
       name="simple-controlled"
@@ -77,6 +83,16 @@ const [rating,setRatingVal] = useState(0)
       </Button>
       </BtnCont>
       </form>
+
+        </div>
+      );
+    }
+  }
+
+
+  return (
+    <Cont>
+    {checkUserLogin()}
     </Cont>
   );
 }

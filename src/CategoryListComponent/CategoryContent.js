@@ -91,19 +91,15 @@ function CategoryContent() {
 }
 
   useEffect(() => {
+    
       HomeService.getProductsFromCategoryFilteredByPrice(from,minPrice,maxPrice).then((response) => {
         setFiltered(response.data);
-
     });
-
 
    }, [minPrice,maxPrice]);
 
-   console.log(filtered)
-
-
+console.log(from)
   return (
-    
     <StyledContainer>
     <StyledFilter>
     <StyledPriceText>Cena:</StyledPriceText>

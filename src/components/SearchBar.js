@@ -71,6 +71,7 @@ function SearchBar({ placeholder, data }) {
     const [wordEntered, setWordEntered] = useState("");
   
     const handleFilter = (event) => {
+
       const searchWord = event.target.value;
       setWordEntered(searchWord);
       const newFilter = data.filter((value) => {
@@ -82,6 +83,7 @@ function SearchBar({ placeholder, data }) {
       } else {
         setFilteredData(newFilter);
       }
+
     };
     
     return (

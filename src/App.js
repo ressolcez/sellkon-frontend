@@ -8,21 +8,30 @@ import ListCategoryView from "./adminComponents/ListCategoryView";
 import AddCategoryView from "./adminComponents/AddCategoryView";
 import ProductDetails from "./pages/ProductDetails";
 import { UserContext } from "./context/UserContext";
-import React, { useState,useMemo } from 'react'
+import React, { useState,useMemo,useEffect } from 'react'
+import Cart from "./pages/Cart";
+import { CartProvider } from "react-use-cart";
 
 function App() {
   const [user,setUser] = useState('')
   const providerUser = useMemo(() => ({user,setUser}),[user,setUser])
 
-  /*
+ 
+  
   useEffect(() => {
     const saved = localStorage.getItem("user");
     const initialValue = JSON.parse(saved);
+    if(initialValue === null){
+      setUser(0)
+    }else{
     setUser(initialValue);
+    }
+
   }, []);
-*/
+
   return (
     <BrowserRouter>
+    <CartProvider>
     <UserContext.Provider value = {providerUser}>
       <Routes>
       <Route exact path="/" element={<Home/>}/>
@@ -35,8 +44,10 @@ function App() {
       <Route exact path="/:cateGoryName" element={<CategoriesListProduct/>}/>
       <Route path="/:cateGoryName/:id" element={<ProductDetails/>}/>
       <Route path = "/EditProduct/:id" element = {<AddProductView/>}></Route>
+      <Route path = "/Cart" element = {<Cart/>}></Route>
       </Routes>
       </UserContext.Provider>
+      </CartProvider>
     </BrowserRouter>
   );
 }

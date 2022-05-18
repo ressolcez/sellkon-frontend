@@ -6,6 +6,8 @@ import { useLocation } from 'react-router-dom'
 import "react-image-gallery/styles/css/image-gallery.css";
 import ProductDetailsComponent from '../ProductDetailsComponents/ProductDetailsComponent';
 import Divider from '@material-ui/core/Divider';
+import {useParams} from "react-router-dom";
+import HomePageServices from '../services/HomePageServices';
 
 
 const StyledDivider = styled(Divider)`
@@ -17,15 +19,23 @@ const StyledCont = styled.div `
   margin-left: 150px;
 `
 
+
 function ProductDeatails() {
-  const location = useLocation()
-  const { product_details } = location.state
+  let { id } = useParams();
+  const [products,setProducts] = useState({})
+
+  useEffect(() => {
+    HomePageServices.getProductById(id).then((responseProduct) => {
+      setProducts(responseProduct.data);
+    });
+   }, []);
   
   
   return (
     <StyledCont>
-      <Topbar decision={product_details.categoryModel.category_id}/>
-      <ProductDetailsComponent product_details = {product_details}/>
+      <Topbar decision={0}/>
+      <ProductDetailsComponent products = {products}
+      />
       <StyledDivider/>
       <Footer/>
    </StyledCont>

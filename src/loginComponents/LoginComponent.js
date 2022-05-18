@@ -6,6 +6,9 @@ import { UserContext } from '../context/UserContext';
 import HomePageServices from '../services/HomePageServices';
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import { TextField } from "@material-ui/core";
 
 const Container = styled.div`
     margin-top:10%;
@@ -111,18 +114,48 @@ const StyledLogo = styled.img` margin-top:20px;`
 
 const StyledDiv = styled.div` margin-top:30px; margin-bottom:50px;`
 
-function LoginComponent() {
-  const {user,setUser} = useContext(UserContext);
-  const navigate = useNavigate();
+const StyledBadLoginDesc = styled.text`color:red; font-size:15px;`
 
+function LoginComponent() {
+  const navigate = useNavigate();
+  let {user,setUser} = useContext(UserContext);
+
+  const [value, setValue] = useState(0)
+  const [correctData,setCorrectData] = useState(0)
+
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
+
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [LoginUsername, setLoginUsername] = useState('')
+  const [LoginPassword, setLoginPassword] = useState('')
+
+
+  function addUser(user_id,username){
+
+    let newUser = user_id;
+    user = {
+      id: newUser,
+      name: username
+    };
+    
+    console.log(user)
+    localStorage.setItem("user", JSON.stringify(user))
+
+    navigate("/")
+    window.location.reload(false);
+    
+  }
 
   function userExists(username, password,asd) {
-   
     return asd.some(function(el) {
       if(el.username === username && el.password === password){
-        navigate("/")
+        addUser(el.user_id,el.username)
+
       return true
       }else{
+        setCorrectData(1)
         return false
       }
     }); 
@@ -130,7 +163,6 @@ function LoginComponent() {
 
   const registerUser = (e) => {
 
-      e.preventDefault();
       const newUser = {username,password,name}
       HomePageServices.registerUser(newUser)
       window.location.reload(false);
@@ -146,22 +178,23 @@ function LoginComponent() {
     });
 }
 
-
-  const [value, setValue] = useState(0)
-
-
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [name, setName] = useState('')
-
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [LoginUsername, setLoginUsername] = useState('')
-  const [LoginPassword, setLoginPassword] = useState('')
+function checkCorrectdata(){
+  if(correctData===0){
+    return;
+  }else{
+    return(
+      <StyledBadLoginDesc>Niepoprawny login lub hasło</StyledBadLoginDesc>
+    );
+  }
+}
 
   function checkLayout(){
     if(value===0){
       return (
       <div>
+        {
+          checkCorrectdata()
+        }
          <form>
         <div>
          <StyledLoginUser placeholder='E-mail' onChange={(e) => setLoginUsername(e.target.value)}/>
@@ -170,7 +203,7 @@ function LoginComponent() {
         <StyledDiv>
         <Button style={{
         backgroundColor: "green",width:'350px', borderRadius:'20px', height:'40px', outline: 'none'
-       }}variant="contained"// onClick={()=>setUser("elo")}
+       }}variant="contained"
        onClick = {(e) => loginUser(e)}
        >
         Zaloguj się
@@ -193,7 +226,7 @@ function LoginComponent() {
         <StyledDiv>
         <Button style={{
         backgroundColor: "green",width:'350px', borderRadius:'20px', height:'40px', outline: 'none'
-       }}variant="contained" //onClick={()=>localStorage.setItem("user", JSON.stringify(user))}
+       }}variant="contained"
        onClick = {(e) => registerUser(e)}
        >
         Utwórz konto

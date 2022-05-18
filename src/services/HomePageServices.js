@@ -65,8 +65,8 @@ class HomePageServices{
         return axios.get("http://localhost:8080/opinions/opinionsProduct/"+productId)
     }
 
-    addOpinion(productId,opinion){
-      return axios.post("http://localhost:8080/opinions/"+ productId, opinion)
+    addOpinion(productId,userId,opinion){
+      return axios.post("http://localhost:8080/opinions/"+ productId+ "/"+userId, opinion)
     }
 
     registerUser(userData)
