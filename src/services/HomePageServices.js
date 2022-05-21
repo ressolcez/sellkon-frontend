@@ -50,6 +50,9 @@ class HomePageServices{
             maxPrice = 50000;
           }
 
+          console.log("minprice"+minPrice)
+          console.log("maxprice"+maxPrice)
+
         return axios.get("http://localhost:8080/products/price/" + categoryId +"/" + minPrice + "/" + maxPrice)
     }
 
@@ -72,6 +75,10 @@ class HomePageServices{
     registerUser(userData)
     {
         return axios.post('http://localhost:8080/user/', userData)
+    }
+
+    sendNewsLetter(value){
+            return axios.post('http://localhost:8080/newsLetter/'+value)
     }
 }
 
