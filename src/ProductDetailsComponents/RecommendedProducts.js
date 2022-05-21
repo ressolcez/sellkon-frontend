@@ -33,13 +33,13 @@ function RecommendedProducts({item,opinions}) {
   
     return (
         <Item>
-          <Link to={"/"+item.categoryModel.cateGoryName+"/"+item.product_id}  state={{ product_details: item, opinions_det: opinions }}>
+          <Link to={"/"+item.categoryModel.cateGoryName+"/"+item.id}  state={{ product_details: item, opinions_det: opinions }}>
           <ImgC src = {item.image}/>
           </Link>
           <TitleC>
           <TitleProductName>{item.shortName}</TitleProductName>
           </TitleC>
-          <StyledPrice>{item.newPrice},00zł</StyledPrice>
+          <StyledPrice>{item.price},00zł</StyledPrice>
         </Item>
        
       );

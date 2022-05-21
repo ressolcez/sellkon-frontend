@@ -4,8 +4,6 @@ import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
 import HomeService from '../services/HomePageServices';
 import {Link } from "react-router-dom";
 
-
-
 const Container = styled.div`
     width: 100%;
     height: 100vh;
@@ -72,17 +70,10 @@ const Desc = styled.p`
 `
 
 
-const Slider = () => {
+const Slider = ({post}) => {
 
     const[slideIndex,setSlideIndex] = useState(0);
-    const [post, setPost] = useState([]);
-
-    useEffect(() => {
-       HomeService.getSliderContent().then((response) => {
-          setPost(response.data);
-        });
-      }, []);
-
+  
     const handleClick =(dir) =>{
 
         if(dir==="left"){
@@ -102,7 +93,7 @@ const Slider = () => {
             {post.map((post2)=>(
             <Slide bg = {post2.bg} key={post2.id}>
             <ImgCont>
-                 <Link to={"/"+post2.categoryModel.cateGoryName+"/"+post2.product_id}  state={{ product_details: post2 }}>
+                 <Link to={"/"+post2.categoryModel.cateGoryName+"/"+post2.id}  state={{ product_details: post2 }}>
                      <ImgC src = {post2.image}/>
                   </Link>
             </ImgCont>

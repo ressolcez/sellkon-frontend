@@ -5,6 +5,7 @@ import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import Rating from "@mui/material/Rating";
 import HomeService from '../services/HomePageServices';
 import { UserContext } from '../context/UserContext';
+import AddCommentIcon from '@mui/icons-material/AddComment';
 
 const Cont = styled.div`
   margin-top: 30px;
@@ -78,7 +79,7 @@ function AddOpinion({item}) {
       <BtnCont>
       <Button onClick = {(e) => addProduct(e)} style={{
         backgroundColor: "gray",
-       }}variant="contained" endIcon={ <ContentPasteIcon />} >
+       }}variant="contained" endIcon={ <AddCommentIcon />} >
         Dodaj Opinie
       </Button>
       </BtnCont>

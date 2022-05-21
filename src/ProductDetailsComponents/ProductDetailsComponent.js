@@ -13,7 +13,10 @@ import OpinionsComponent from './Opinions';
 import AddOpinion from './AddOpinion'
 import Rating from "@mui/material/Rating";
 import {useParams} from "react-router-dom";
-import {useCart} from "react-use-cart"
+import {useCart} from "react-use-cart";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
 const breakPoints = [
   { width: 500, itemsToShow: 5 },
 ];
@@ -77,6 +80,14 @@ const StyledOpinions = styled.div`
 font-size: 18px;
 `
 
+const StyledButton = styled(Button)`
+  :focus {outline:none;}
+`
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 function ProductDetailsComponent({products}) {
 
   let { id } = useParams();
@@ -84,6 +95,9 @@ function ProductDetailsComponent({products}) {
 
   const [recommendedProducts ,setRecommendedProducts] = useState([])
   const [opinions ,setOpinions] = useState([])
+
+  const [open, setOpen] = React.useState(false);
+
 
   const images = [
     {
@@ -104,6 +118,18 @@ function ProductDetailsComponent({products}) {
     });
 
    }, []);
+
+   function handleAddtoCart(products){
+      addItem(products);
+      setOpen(true);
+   }
+
+   const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
 
    const handleRating = () => {
     var rating = 0;
@@ -294,11 +320,17 @@ function ProductDetailsComponent({products}) {
 
       <h3>{products.productName}</h3>
       {products.shortDesc} {products.fullDescription}
-      <StyledPrice> <b>Cena:</b>  {products.newPrice},00zł</StyledPrice>
+      <StyledPrice> <b>Cena:</b>  {products.price},00zł</StyledPrice>
       {console.log(products)}
-      <Button style={{backgroundColor: "green",}}variant="contained" endIcon={ <ShoppingCartIcon />} onClick={() => addItem(products)}>
+      <StyledButton style={{backgroundColor: "green",}}variant="contained" endIcon={ <ShoppingCartIcon />} onClick={() => handleAddtoCart(products)}>
         Dodaj do koszyka
-      </Button>
+      </StyledButton>
+
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Dodano do koszyka
+        </Alert>
+      </Snackbar>
 
       </StyledDesc>
       </StyledInsideCont>
@@ -318,7 +350,7 @@ function ProductDetailsComponent({products}) {
           ))}
           
       <StyledDivider/>
-      <AddOpinion item = {products.product_id}/>
+      <AddOpinion item = {products.id}/>
       <StyledSpec><h4>Polecane produkty:</h4></StyledSpec>
       
       {<StyledCarouselContainer>

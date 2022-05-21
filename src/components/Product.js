@@ -1,7 +1,11 @@
 import React from 'react'
 import styled from "styled-components";
 import {Link } from "react-router-dom";
-
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import IconButton from '@mui/material/IconButton';
+import {useCart} from "react-use-cart";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 const Info = styled.div`
   opacity: 0;
@@ -16,13 +20,11 @@ const Info = styled.div`
   align-items: center;
   justify-content: center;
   transition: all 0.5s ease;
-  cursor: pointer;
   padding: 10px;
   color: black;
 `;
 
 const Container = styled.div`
-  flex: 1;
   margin: 5px;
   min-width: 280px;
   max-width:280px;
@@ -51,28 +53,66 @@ const Title = styled.text`
 const Desc = styled.text`
   font-size: 14px;
   display: flex;
+  margin-bottom: 10px;
 `
 
 const Price = styled.text`
   font-size 14px;
   color:green;
 `
+const StyledButton = styled(IconButton)`
+  :focus {outline:none;}
+`
 
-
-const StyledImage = styled.div``
+const StyledLink = styled(Link)`
+  color: black;
+  &:hover{
+    color: black;
+    text-decoration: none;
+  }
+`
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function Product({ item }) {
+
+  const { addItem } = useCart();
+  const [open, setOpen] = React.useState(false);
+
+  function handleAddtoCart(products){
+    addItem(products);
+    setOpen(true);
+ }
+
+ const handleClose = (event, reason) => {
+
+  if (reason === 'clickaway') {
+    return;
+  }
+  setOpen(false);
+
+};
+
   return (
     <Container>
     <Image src={item.image} />
-    <Link to={"/"+item.categoryModel.cateGoryName+"/"+item.product_id}  state={{ product_details: item }}>
       <Info>
+      <StyledLink to={"/"+item.categoryModel.cateGoryName+"/"+item.id}  state={{ product_details: item }}>
         <Title>{item.shortName}</Title>
           <Desc>{item.shortDesc}</Desc>
-            <Price>{item.newPrice},00zł</Price>       
+          </StyledLink>
+            <Price><b style={{color:'black'}}>Cena: </b>{item.price},00zł
+            <StyledButton color="primary" style = {{color:'black'}} onClick={() => handleAddtoCart(item)}>
+               <AddShoppingCartIcon />
+            </StyledButton>
+            </Price>       
       </Info>
-      </Link>
-
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Dodano do koszyka
+        </Alert>
+      </Snackbar>
   </Container>
 
   );

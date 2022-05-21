@@ -56,7 +56,7 @@ const TableContainer = styled.div`
                         Products.map(
                             Product =>
                             <tr key = {Product.id}> 
-                                <td> {Product.product_id} </td>
+                                <td> {Product.id} </td>
                                 <td>{Product.productName}</td>
                                 <td>{Product.shortName}</td>
                                 <td>{Product.price}</td>
@@ -68,9 +68,9 @@ const TableContainer = styled.div`
                                 <td>{Product.image}</td>
                                 <td>{Product.categoryModel.category_id}</td>
                                 <td>
-                                <button className = "btn btn-danger btn-block" onClick = {() => deleteProduct(Product.product_id)}
+                                <button className = "btn btn-danger btn-block" onClick = {() => deleteProduct(Product.id)}
                                     style = {{marginBottom: "10px"}}> Usuń</button>
-                                    <Link className="btn btn-info" to={`/EditProduct/${Product.product_id}`} >Modyfikuj</Link>
+                                    <Link className="btn btn-info" to={`/EditProduct/${Product.id}`} >Modyfikuj</Link>
                                 </td>
                             </tr>
                         )

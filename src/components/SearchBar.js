@@ -102,13 +102,13 @@ function SearchBar({ placeholder, data }) {
             {filteredData.slice(0, 15).map((value, key) => {
               return (
                 <StyledDataItem>
-              <Link to={"/"+value.categoryModel.cateGoryName+"/"+value.product_id} state={{ from: value }}>
+              <Link to={"/"+value.categoryModel.cateGoryName+"/"+value.id} state={{ from: value }}>
                  <ImgC src = {value.image}/>
                  </Link>          
                     <TitleC>
                     <TitleProductName>{value.shortName}</TitleProductName>
                     <StyledCategory>{value.categoryModel.cateGoryName}</StyledCategory>
-                    <StyledPrice>{value.newPrice},00zł</StyledPrice>
+                    <StyledPrice>{value.price},00zł</StyledPrice>
                     </TitleC>
                 </StyledDataItem>     
               );

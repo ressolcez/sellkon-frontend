@@ -23,15 +23,7 @@ const Button = styled.button`
     border-radius: 50%;
 `
 
-const Sales = () => {  
-
-  const [Sales, setSales] = useState([]);
-
-  useEffect(() => {
-    HomeService.getSpecialOfferContent().then((response) => {
-      setSales(response.data);
-     });
-   }, []);
+const Sales = ({sales}) => {  
 
   return (
     <StyledContainer>
@@ -45,7 +37,7 @@ const Sales = () => {
         }}
         pagination = {false}
 >
-        {Sales.map((item) => (
+        {sales.map((item) => (
             <Sale item={item} key={item.id} />
           ))}
         </Carousel>

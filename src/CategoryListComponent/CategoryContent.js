@@ -7,7 +7,8 @@ import {motion} from 'framer-motion'
 
 const StyledContainer = styled.div`
       display: flex;
-      margin-top: 40px;
+      margin-top: 50px;
+      margin-left:60px;
 `
 
 const StyledFilter = styled.div`
@@ -42,74 +43,37 @@ const StyledPriceText = styled.div`
 `
 
 const StyledPriceTextPro = styled.div`
-display:block;
-font-size:15px;
-margin-top: 5px;
-margin-bottom: 8px;
+    display:block;
+    font-size:15px;
+    margin-top: 5px;
+    margin-bottom: 8px;
 `
 
 const mystyle = {
   display:'flex',
   flexWrap: 'wrap',
-  marginLeft: '5%',
-  width:'82.5%'
+  marginLeft: '2%',
+  width:'82.5%',
+  height:'100vh'
 };
 
 const StyledProducents = styled.div``
 
-
-
-function CategoryContent() {
+function CategoryContent({handleMaxPrice,handleMinPrice,filtered}) {
   
-  const location = useLocation()
-  const { from } = location.state
-  
-  const [products, setProducts] = useState([]);
-  const [filtered,setFiltered] = useState([]);
-
-  const [minPrice,setMinPrice] = useState(0);
-  const [maxPrice,setMaxPrice] = useState(20000);
-  const [unknow,setUnknow] = useState(0);
 
  
-  const handleProducentsName = () => {
-    if(from===1){
-      return(
-        <div>
-          <h3>dell</h3>
-
-        </div>
-      );
-    }else if(from===2){
-       return(
-        <div>
-          <h3>asus</h3>
-
-        </div>
-       );
-    }
-}
-
-  useEffect(() => {
-    
-      HomeService.getProductsFromCategoryFilteredByPrice(from,minPrice,maxPrice).then((response) => {
-        setFiltered(response.data);
-    });
-
-   }, [minPrice,maxPrice]);
-
-console.log(from)
   return (
     <StyledContainer>
     <StyledFilter>
     <StyledPriceText>Cena:</StyledPriceText>
     <StyledMinPrice
     placeholder='Min'
-    onChange={(e) => setMinPrice(e.target.value)}
+    onChange={(e) => handleMinPrice(e.target.value)}
     /> - 
     <StyledMaxPrice
     placeholder='Max'
-    onChange={(e) => setMaxPrice(e.target.value)}
+    onChange={(e) => handleMaxPrice(e.target.value)}
 
     />
 

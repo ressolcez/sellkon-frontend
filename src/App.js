@@ -11,6 +11,7 @@ import { UserContext } from "./context/UserContext";
 import React, { useState,useMemo,useEffect } from 'react'
 import Cart from "./pages/Cart";
 import { CartProvider } from "react-use-cart";
+import StripeClass from "./Stripe/StripeClass";
 
 function App() {
   const [user,setUser] = useState('')

@@ -8,7 +8,8 @@ import ProductDetailsComponent from '../ProductDetailsComponents/ProductDetailsC
 import Divider from '@material-ui/core/Divider';
 import {useParams} from "react-router-dom";
 import HomePageServices from '../services/HomePageServices';
-
+import Spinner from 'react-bootstrap/Spinner'
+import PacmanLoader from "react-spinners/PacmanLoader";
 
 const StyledDivider = styled(Divider)`
   color: white;
@@ -19,23 +20,34 @@ const StyledCont = styled.div `
   margin-left: 150px;
 `
 
+const StyledSpinner = styled.div`text-align:center; margin-top:50vh;`
+
 
 function ProductDeatails() {
   let { id } = useParams();
   const [products,setProducts] = useState({})
+  const [isLoading, setLoading] = useState(true);
+
 
   useEffect(() => {
     HomePageServices.getProductById(id).then((responseProduct) => {
       setProducts(responseProduct.data);
+      setLoading(false);
+
     });
    }, []);
   
-  
+   if (isLoading) {
+    return (
+    <StyledSpinner>
+        <PacmanLoader color= 'gray'/>
+    </StyledSpinner>
+    );
+  }
   return (
     <StyledCont>
       <Topbar decision={0}/>
-      <ProductDetailsComponent products = {products}
-      />
+      <ProductDetailsComponent products = {products}/>
       <StyledDivider/>
       <Footer/>
    </StyledCont>

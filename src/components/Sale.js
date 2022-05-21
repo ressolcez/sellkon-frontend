@@ -27,21 +27,21 @@ margin-top:10px;
 `
 
 const PriceC = styled.div`
-font-size: 10px;
+font-size: 13px;
 `
 
 
 function Sale({item}) {
   return (
     <Item>
-      <Link to={"/"+item.categoryModel.cateGoryName+"/"+item.product_id}  state={{ product_details: item }}>
+      <Link to={"/"+item.categoryModel.cateGoryName+"/"+item.id}  state={{ product_details: item }}>
       <ImgC src = {item.image}/>
       </Link>
       <TitleC>
       <TitleProductName>{item.shortName}</TitleProductName>
       </TitleC>
-      <PriceC><Text as='s'>{item.price},00zł</Text></PriceC>
-      {item.newPrice},00zł
+      <PriceC><Text as='s'>{item.newPrice},00zł</Text></PriceC>
+      {item.price},00zł
     </Item>
    
   )

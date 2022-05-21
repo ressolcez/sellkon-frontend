@@ -11,15 +11,8 @@ const Container = styled.div`
     width: 100%;
 `;
 
-const Products = () => {
-  const [post, setPost] = useState([]);
-
-  useEffect(() => {
-    HomeService.getRecommendedContent().then((response) => {
-       setPost(response.data);
-     });
-   }, []);
-   
+const Products = ({post}) => {
+ 
   return (
     <Container>
        {post.map((product) => (

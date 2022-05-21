@@ -11,17 +11,7 @@ const Container = styled.div`
 `;
 
 
-function Categories() {
-  
-  const [category, setCategory] = useState([]);
-
-  useEffect(() => {
-    HomeService.getAllCategory().then((response) => {
-      setCategory(response.data);
-     });
-   }, []);
-
-
+function Categories({category}) {
     return (
         <Container>
           {category.map((item) => (

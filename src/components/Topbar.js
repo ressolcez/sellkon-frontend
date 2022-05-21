@@ -1,7 +1,7 @@
 import React, { useState,useEffect,useContext,useRef } from 'react'
 import styled from "styled-components";
 import ShoppingCartOutlined from '@material-ui/icons/ShoppingCartOutlined';
-import { Badge } from "@material-ui/core";
+import Badge from '@mui/material/Badge';
 import SearchBar from './SearchBar';
 import HomeService from '../services/HomePageServices';
 import { IoSearch } from "react-icons/io5";
@@ -16,12 +16,11 @@ import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import MenuList from "@mui/material/MenuList";
 import Stack from "@mui/material/Stack";
-import ListItemText from '@mui/material/ListItemText';
-import { ListItemIcon } from '@mui/material';
 import Divider from '@mui/material/Divider';
-import Check from '@mui/icons-material/Check';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
+import {useCart } from "react-use-cart";
+import { AnimateKeyframes }  from 'react-simple-animate';
 
 const StyledStack = styled(Stack)`
 z-index: 5;
@@ -95,6 +94,9 @@ const StyledButton = styled(Button)`
 
 const Topbar = ({decision}) => {
 
+  const { emptyCart,totalUniqueItems } = useCart();
+
+
 const [post, setPost] = useState([]);
 let {user,setUser} = useContext(UserContext);
 
@@ -142,7 +144,8 @@ function handleListKeyDown(event) {
 
     let newUser = 0;
     user = {id: newUser};
-  
+    emptyCart();
+
     localStorage.setItem("user", JSON.stringify(user))
     window.location.reload(false);
 
@@ -238,8 +241,10 @@ function handleListKeyDown(event) {
 
   return(
         <Wrapper>
+          
             <Logo>
                 <LogoContainer>
+      
                 <StyledLink to={"/"}>
                 <img src = "https://raw.githubusercontent.com/ressolcez/sellkon-frontend/master/Logo.png"/>
                 </StyledLink>
@@ -254,7 +259,9 @@ function handleListKeyDown(event) {
             <RightThings>
             <StyledLink to={"/Cart"}>
                 <MenuItem>
+                <Badge badgeContent={totalUniqueItems} color="success">
                  <ShoppingCartOutlined />
+                 </Badge>
                 </MenuItem>
             </StyledLink>
                 {checkUserState()}
