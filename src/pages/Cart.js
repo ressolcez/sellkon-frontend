@@ -9,6 +9,8 @@ import Button from '@mui/material/Button';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import Stripe from "react-stripe-checkout";
 import axios from "axios";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 const StyledCont = styled.div `
   width: 80%;
@@ -49,36 +51,61 @@ const EmptyCartDiv = styled.div`
   text-align:center;
 
 `
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function Cart() {
+
+  const [open, setOpen] = React.useState(false);
+
 
   const {
     isEmpty,
     totalUniqueItems,
     items,
     cartTotal,
+    emptyCart,
   } = useCart();
+
+  var costBefore = cartTotal
+  var afterDisc = costBefore * 0.05
+  var finalSum = (cartTotal - afterDisc).toFixed(2)
 
   async function handleToken(token) {
     console.log(token);
     await axios.post("http://localhost:8080/api/payment/charge", "", {headers: {
       token: token.id,
-      amount: cartTotal,
+      amount: finalSum,
     },}).then(() => {
-       alert("Payment Success");
+       emptyCart();
+       setOpen(true);
        }).catch((error) => {
        alert(error);
        });
     }
+
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpen(false);
+    };
 
   function checkCartSize(){
     if (isEmpty){
      return (
      <EmptyCartDiv>
        <h3>Twój koszyk jest pusty</h3>
+       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+       <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+         Zrealizowano zamówienie
+       </Alert>
+     </Snackbar>
      </EmptyCartDiv>
      );
     }else{
+
       return(
         <>
           <StyledDesc><h4>Twój koszyk: ({totalUniqueItems})</h4></StyledDesc>
@@ -97,7 +124,7 @@ function Cart() {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Całkowity koszt:</SummaryItemText>
-              <SummaryItemPrice>{cartTotal},00zł</SummaryItemPrice>
+              <SummaryItemPrice>{finalSum}zł</SummaryItemPrice>
             </SummaryItem>
             <Stripe
               stripeKey="pk_test_51L1I2XD3AfM4zq0xzWOGd1538BPuSqjzGIcPKV3imNQUBgsxgcjL2Vg4DxCMsxVF62bMbpuyEgoG84DGnrrT9LiM007kKZEk4V"
