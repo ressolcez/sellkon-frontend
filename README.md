@@ -1,1 +1,1 @@
-Część Front-End sklepu internetowego zrealizowana w technologii REACT.
+Część Front-End sklepu internetowego, zrealizowana w technologii REACT.JS.
